@@ -114,9 +114,13 @@ fi
 # Set MySQL REPLICATION - SLAVE
 if [ -n "${REPLICATION_SLAVE}" ]; then
     echo "=> Configuring MySQL replication as slave (1/2) ..."
-    if [ -n "${MYSQL_PORT_3306_TCP_ADDR}" ] && [ -n "${MYSQL_PORT_3306_TCP_PORT}" ]; then
-        if [ ! -f /replication_set.1 ]; then
-            RAND="$(date +%s | rev | cut -c 1-2)$(echo ${RANDOM})"
+    num=0
+    while (( num < 30 ))  
+    do
+        sleep 1s
+        if [ -n "${MYSQL_PORT_3306_TCP_ADDR}" ] && [ -n "${MYSQL_PORT_3306_TCP_PORT}" ]; then
+            if [ ! -f /replication_set.1 ]; then
+                RAND="$(date +%s | rev | cut -c 1-2)$(echo ${RANDOM})"
             echo "=> Writting configuration file '${CONF_FILE}' with server-id=${RAND}"
             sed -i "s/^#server-id.*/server-id = ${RAND}/" ${CONF_FILE}
             sed -i "s/^#log-bin.*/log-bin = mysql-bin/" ${CONF_FILE}
@@ -124,7 +128,9 @@ if [ -n "${REPLICATION_SLAVE}" ]; then
         else
             echo "=> MySQL replication slave already configured, skip"
         fi
-    else
+    done
+    if (( num == 30 ))
+    then 
         echo "=> Cannot configure slave, please link it to another MySQL container with alias as 'mysql'"
         exit 1
     fi
