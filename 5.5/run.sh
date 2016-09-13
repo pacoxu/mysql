@@ -128,7 +128,7 @@ if [ -n "${REPLICATION_SLAVE}" ]; then
         else
             echo "=> MySQL replication slave already configured, skip"
         fi
-    done
+    done;
     if (( num == 30 ))
     then 
         echo "=> Cannot configure slave, please link it to another MySQL container with alias as 'mysql'"
