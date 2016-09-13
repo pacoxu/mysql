@@ -115,8 +115,7 @@ fi
 if [ -n "${REPLICATION_SLAVE}" ]; then
     echo "=> Configuring MySQL replication as slave (1/2) ..."
     num=0
-    while (( num < 30 ));
-    do
+    while (( num < 30 )); do
         sleep 1s
         if [ -n "${MYSQL_PORT_3306_TCP_ADDR}" ] && [ -n "${MYSQL_PORT_3306_TCP_PORT}" ]; then
             if [ ! -f /replication_set.1 ]; then
@@ -128,7 +127,7 @@ if [ -n "${REPLICATION_SLAVE}" ]; then
         else
             echo "=> MySQL replication slave already configured, skip"
         fi
-    done;
+    done
     if (( num == 30 )); then 
         echo "=> Cannot configure slave, please link it to another MySQL container with alias as 'mysql'"
         exit 1
