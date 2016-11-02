@@ -28,6 +28,8 @@ ENV MYSQL_USER=admin \
 
 # Add VOLUMEs to allow backup of config and databases
 VOLUME  ["/etc/mysql", "/var/lib/mysql"]
+LABEL version="1.0"
+LABEL test="abc"
 
 EXPOSE 3306
 CMD ["/run.sh"]
