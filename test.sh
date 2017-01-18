@@ -49,3 +49,4 @@ docker run  -d -p 23310:3306 -v "$(pwd)/vol56":/var/lib/mysql mysql-5.6; sleep 1
 mysqladmin -uuser -ptest -h127.0.0.1 -P23310 ping | grep -c "mysqld is alive"
 
 echo "=>Done"
+
