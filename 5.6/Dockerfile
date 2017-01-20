@@ -1,5 +1,4 @@
-FROM nothing:nothing
-MAINTAINER Fernando Mayo <fernando@tutum.co>, Feng Honglin <hfeng@tutum.co>
+FROM ubuntu:trusty
 
 # Add MySQL configuration
 COPY my.cnf /etc/mysql/conf.d/my.cnf
@@ -27,6 +26,7 @@ ENV MYSQL_USER=admin \
 
 # Add VOLUMEs to allow backup of config and databases
 VOLUME  ["/etc/mysql", "/var/lib/mysql"]
+LABEL maintainer="Fernando Mayo <fernando@tutum.co>, Feng Honglin <hfeng@tutum.co>"
 
 EXPOSE 3306
 CMD ["/run.sh"]
