@@ -30,7 +30,7 @@ will be created in MySQL with a random password. To get the password, check the 
 of the container by running:
 
         docker logs <CONTAINER_ID>
-
+ 
 You will see an output like the following:
 
         ========================================================================
